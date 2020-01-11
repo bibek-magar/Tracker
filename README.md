@@ -4,7 +4,7 @@ Tracking app that tracks the user location based on React Native and backend Exp
 ---
 
 ##  Install the package
-Package installation for frontend:
+### Package installation for frontend:
 > ` cd tracks`<br>
 >  `npm install` 
 
