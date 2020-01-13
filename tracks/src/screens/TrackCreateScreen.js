@@ -1,11 +1,47 @@
-import React from "react";
-import { Text, StyleSheet, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { StyleSheet } from "react-native";
+import { Text } from "react-native-elements";
+import { SafeAreaView } from "react-navigation";
+import {
+  requestPermissionsAsync,
+  watchPositionAsync,
+  Accuracy
+} from "expo-location";
+
+import Map from "../components/Map";
+import "../_mockLocation";
 
 const TaskCreateScreen = () => {
+  const [err, setErr] = useState(null);
+  const startWatching = async () => {
+    try {
+      await requestPermissionsAsync();
+      await watchPositionAsync(
+        {
+          accuracy: Accuracy.BestForNavigation,
+          timeInterval: 1000,
+          distanceInterval: 10
+        },
+        location => {
+          console.log(location);
+        }
+      );
+    } catch (e) {
+      console.log(e);
+      setErr(e);
+    }
+  };
+  useEffect(() => {
+    startWatching();
+  }, []);
+
   return (
-    <View>
-      <Text style={{ fontSize: 48 }}>Task Create Screen</Text>
-    </View>
+    <SafeAreaView forceInset={{ top: "always" }}>
+      <Text h2>Create a Track</Text>
+      <Map />
+
+      {err ? <Text>Please enable location services</Text> : null}
+    </SafeAreaView>
   );
 };
 

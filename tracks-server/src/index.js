@@ -8,6 +8,8 @@ const trackRoutes = require("./routes/trackRoutes");
 const requireAuth = require("./middlewares/requireAuth");
 
 const app = express();
+let cors = require("cors");
+app.use(cors());
 
 app.use(bodyParser.json());
 app.use(authRoutes);
