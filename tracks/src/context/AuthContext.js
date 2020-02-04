@@ -49,7 +49,7 @@ const signin = dispatch => async ({ email, password }) => {
   } catch (err) {
     dispatch({
       type: "add_error",
-      payload: "Something wend wrong with sign in"
+      payload: "Something went wrong with sign in"
     });
   }
 };
